@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Palindrome {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print(" ");
+        String input = scanner.nextLine();
+        
+        if (Palindrome(input)) {
+            System.out.println("The string \"" + input + "\" is a palindrome.");
+        } else {
+            System.out.println("The string \"" + input + "\" is not a palindrome.");
+        }
+        
+        scanner.close();
+    }
+
+    public static boolean Palindrome(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+            
+            while (left < right && !isAlphanumeric(str.charAt(left))) {
+                left++;
+            }
+            while (left < right && !isAlphanumeric(str.charAt(right))) {
+                right--;
+            }
+            while (right < left && !isAlphanumeric(str.charAt(right))) {
+                right--;
+            }
+            while (right < left && !isAlphanumeric(str.charAt(left))) {
+                left++;
+            }
+
+            {
+            if (Character.toLowerCase(str.charAt(left)) != Character.toLowerCase(str.charAt(right))) {
+                return false; 
+            }
+            
+        }
+            left++; 
+            right--; 
+        }
+        
+        return true; 
+    }
+
+    
+    public static boolean isAlphanumeric(char c) {
+        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
+    }
+}
